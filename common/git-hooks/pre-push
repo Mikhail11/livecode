@@ -1,3 +1,2 @@
 #!/bin/sh
-# Проверка наличия записанных ченджлогов и Проверка типов
-node common/scripts/install-run-rush.js change --verify && node common/scripts/install-run-rush.js check-types --from git:origin/develop
+node common/scripts/install-run-rush.js check-types --from git:origin/master
