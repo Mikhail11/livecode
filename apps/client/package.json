@@ -4,9 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "lint-staged": "lint-staged",
+    "check-types": "tsc -p tsconfig.app.json --emitDeclarationOnly",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -119,7 +119,7 @@
   //     "tools",      // non-shipping projects that are part of the developer toolchain
   //     "prototypes"  // experiments that should mostly be ignored by the review process
   //   ],
-  // 
+  //
   //   /**
   //    * A list of NPM package scopes that will be excluded from review.
   //    * We recommend to exclude TypeScript typings (the "@types" scope), because
@@ -149,14 +149,12 @@
     //   "[^@]+@users\\.noreply\\.github\\.com",
     //   "rush-bot@example\\.org"
     // ],
-
     /**
      * When Rush reports that the address is malformed, the notice can include an example
      * of a recommended email.  Make sure it conforms to one of the allowedEmailRegExps
      * expressions.
      */
     // "sampleEmail": "example@users.noreply.github.com",
-
     /**
      * The commit message to use when committing changes during 'rush publish'.
      *
@@ -165,7 +163,6 @@
      * in the commit message, and then customize Rush's message to contain that string.
      */
     // "versionBumpCommitMessage": "Bump versions [skip ci]",
-
     /**
      * The commit message to use when committing changes during 'rush version'.
      *
@@ -174,13 +171,12 @@
      * in the commit message, and then customize Rush's message to contain that string.
      */
     // "changeLogUpdateCommitMessage": "Update changelogs [skip ci]",
-
     /**
      * The commit message to use when commiting changefiles during 'rush change --commit'
      *
      * If no commit message is set it will default to 'Rush change'
      */
-     // "changefilesCommitMessage": "Rush change"
+    // "changefilesCommitMessage": "Rush change"
   },
 
   "repository": {
@@ -200,13 +196,11 @@
      * to retrieve the latest activity for the remote main branch.
      */
     // "url": "https://github.com/microsoft/rush-example",
-
     /**
      * The default branch name. This tells "rush change" which remote branch to compare against.
      * The default value is "main"
      */
     // "defaultBranch": "main",
-
     /**
      * The default remote. This tells "rush change" which remote to compare against if the remote URL is
      * not set or if a remote matching the provided remote URL is not found.
@@ -264,7 +258,7 @@
     //    * The folder name for this variant.
     //    */
     //   "variantName": "old-sdk",
-    // 
+    //
     //   /**
     //    * An informative description
     //    */
@@ -290,13 +284,13 @@
   // "hotfixChangeEnabled": false,
 
   /**
-    * This is an optional, but recommended, list of allowed tags that can be applied to Rush projects
-    * using the "tags" setting in this file.  This list is useful for preventing mistakes such as misspelling,
-    * and it also provides a centralized place to document your tags.  If "allowedProjectTags" list is
-    * not specified, then any valid tag is allowed.  A tag name must be one or more words
-    * separated by hyphens or slashes, where a word may contain lowercase ASCII letters, digits,
-    * ".", and "@" characters.
-    */
+   * This is an optional, but recommended, list of allowed tags that can be applied to Rush projects
+   * using the "tags" setting in this file.  This list is useful for preventing mistakes such as misspelling,
+   * and it also provides a centralized place to document your tags.  If "allowedProjectTags" list is
+   * not specified, then any valid tag is allowed.  A tag name must be one or more words
+   * separated by hyphens or slashes, where a word may contain lowercase ASCII letters, digits,
+   * ".", and "@" characters.
+   */
   // "allowedProjectTags": [ "tools", "frontend-team", "1.0.0-release" ],
 
   /**
@@ -308,15 +302,15 @@
    * 3. It's useful to have a centralized inventory of all projects and their important metadata.
    */
   "projects": [
-     {
-        "packageName": "client",
-        "projectFolder": "apps/client",
-        "shouldPublish": false
-     }
-//     {
-//       "packageName": "server",
-//       "projectFolder": "apps/server",
-//       "shouldPublish": false
-//     }
+    {
+      "packageName": "client",
+      "projectFolder": "apps/client",
+      "shouldPublish": false
+    },
+    {
+      "packageName": "server",
+      "projectFolder": "apps/server",
+      "shouldPublish": false
+    }
   ]
 }
