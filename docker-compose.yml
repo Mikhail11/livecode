@@ -1,0 +1,34 @@
+version: '3.9'
+
+# Важно: при запуске docker-compose надо указать файл с env-переменными, например, файл с тестовыми значениями .env.sample (реальные данные в репозитории не храним)
+# docker-compose --env-file .env.sample up
+# если рядом с docker-compose.yaml лежит файл .env, то docker-compose будет использовать его по-умолчанию
+services:
+  db_postgres:
+    image: postgres:17
+    restart: always
+    container_name: postgres
+
+    env_file:
+      - ./apps/server/.production.env
+    environment:
+      - POSTGRES_HOST={POSTGRES_HOST}
+
+    ports:
+      - '${POSTGRES_HOST:-5333}:5432'
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:9.1.0
+    restart: always
+    container_name: pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin4
+    ports:
+      - '5050:80'
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - db_postgres
