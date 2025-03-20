@@ -1,4 +1,9 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import * as bcrypt from 'bcryptjs';
 import { CreateUserDto, UserService } from '~modules/user';
 import { LoginUserDto } from './dto';
@@ -7,10 +12,11 @@ import { LoginUserDto } from './dto';
 export class AuthService {
   constructor(private userService: UserService) {}
 
-  login(userDto: LoginUserDto) {
-    console.log('User logged with: ', userDto);
+  async login(userDto: LoginUserDto) {
+    const user = await this.validateUser(userDto);
 
     return {
+      id: user.id,
       isLoggedIn: true,
     };
   }
@@ -39,5 +45,28 @@ export class AuthService {
       id: user.id,
       email: user.email,
     };
+  }
+
+  private async validateUser(userDto: CreateUserDto) {
+    const user = await this.userService.getUserByEmail(userDto.email);
+
+    if (!user) {
+      throw new UnauthorizedException({
+        message: 'Некорректный email или пароль',
+      });
+    }
+
+    const isPasswordEqual = await bcrypt.compare(
+      userDto.password,
+      user.password,
+    );
+
+    if (isPasswordEqual) {
+      return user;
+    }
+
+    throw new UnauthorizedException({
+      message: 'Некорректный email или пароль',
+    });
   }
 }
