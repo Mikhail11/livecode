@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '~app';
 
@@ -8,6 +9,9 @@ async function startApp() {
 
   // Все запросы должны начинаться с префикса api
   app.setGlobalPrefix('api');
+
+  // Включаем автоматическую валидация согласно правилам, описанным в DTO
+  app.useGlobalPipes(new ValidationPipe());
 
   await app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 }
