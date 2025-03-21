@@ -1,0 +1,25 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+RUN npm install -g @microsoft/rush
+RUN npm install -g pnpm
+
+COPY rush.json .
+COPY common/config/rush/ ./common/config/rush/
+COPY apps/server/package.json ./apps/server/
+
+# Развертываем только приложение server
+#RUN rush deploy --project server
+
+WORKDIR /app/apps/server
+
+RUN rush install
+
+COPY apps/server ./apps/server
+
+WORKDIR /app/apps/server
+
+RUN rushx build
+
+CMD ["rushx", "start:prod"]

@@ -3,10 +3,10 @@ version: '3.9'
 # docker-compose --env-file ./apps/server/.development.env up
 # если рядом с docker-compose.yaml лежит файл .env, то docker-compose будет использовать его по-умолчанию
 services:
-  db_postgres:
+  postgres:
     image: postgres:17
     restart: always
-    container_name: postgres
+    container_name: postgres_container
 
     env_file:
       - ./apps/server/.development.env
@@ -19,7 +19,7 @@ services:
   pgadmin:
     image: dpage/pgadmin4:9.1.0
     restart: always
-    container_name: pgadmin4
+    container_name: pgadmin4_container
     environment:
       - PGADMIN_DEFAULT_EMAIL=admin@admin.com
       - PGADMIN_DEFAULT_PASSWORD=pgadmin4
@@ -28,4 +28,4 @@ services:
     volumes:
       - ./pgadmin-data:/var/lib/pgadmin
     depends_on:
-      - db_postgres
+      - postgres
