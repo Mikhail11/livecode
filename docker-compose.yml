@@ -1,6 +1,7 @@
 version: '3.9'
 
-# docker-compose --env-file ./apps/server/.development.env up
+# чтобы env-переменные были доступны в самом docker-compose-файле:
+# docker-compose --env-file ./apps/server/.env.development up
 # если рядом с docker-compose.yaml лежит файл .env, то docker-compose будет использовать его по-умолчанию
 services:
   postgres:
@@ -9,7 +10,7 @@ services:
     container_name: postgres_container
 
     env_file:
-      - ./apps/server/.development.env
+      - ./apps/server/.env.development
 
     ports:
       - '${POSTGRES_PORT:-5433}:5432'

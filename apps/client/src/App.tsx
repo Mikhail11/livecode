@@ -1,10 +1,25 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
+  const [users, setUsers] = useState<{
+    id: number;
+    email:string;
+  }[] | null>(null)
+
   const [count, setCount] = useState(0)
+
+useEffect(()=>{
+  fetch(`${import.meta.env.VITE_API_HOST}:${import.meta.env.VITE_API_PORT}/api/user`).then(response => response.json()).then((users)=>{
+    console.log(users);
+
+    return users;
+  }).then((users)=>{
+    setUsers(users);
+  })
+},[])
 
   return (
     <>
@@ -16,18 +31,19 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + React</h1>
+
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>
           count is {count}
         </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+
+      <h2>Remote users</h2>
+      {users?.map((user)=>(
+        <article key={user.id}>
+          <h3>{user.email}</h3>
+        </article>
+      ))}
     </>
   )
 }

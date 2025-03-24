@@ -5,7 +5,7 @@ import { AppModule } from '~app';
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
 
 async function startApp() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { cors: true });
 
   // Все запросы должны начинаться с префикса api
   app.setGlobalPrefix('api');
