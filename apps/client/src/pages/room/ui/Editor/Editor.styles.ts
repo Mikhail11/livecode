@@ -6,4 +6,6 @@ export const EditArea = styled(MonacoEditor)`
   box-sizing: border-box;
 `;
 
-export const Wrapper = styled.div``;
+export const Wrapper = styled.div`
+  width: 100%;
+`;

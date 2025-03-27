@@ -1,4 +1,5 @@
 export interface IEditorProps {
+  defaultCode?: string;
   className?: string;
-  onChange?: (value: string | undefined) => void;
+  onChange?: (value: string) => void;
 }

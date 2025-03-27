@@ -1,4 +1,4 @@
-export interface Playground {
-  value: string;
+export interface IPlaygroundProps {
+  code: string;
   className?: string;
 }
