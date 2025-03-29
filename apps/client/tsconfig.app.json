@@ -8,14 +8,14 @@
     "skipLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@routes/*": ["src/app/routes/*"],
-      "@pages": ["src/pages"],
+      "@app": ["src/app/index"],
+      "@pages/*": ["src/pages/*"],
       "@entities/*": ["src/entities/*"],
+      "@widgets/*": ["src/widgets/*"],
       "@api/*": ["src/shared/api/*"],
       "@ui/*": ["src/shared/ui/*"]
     },
 
-    /* Bundler mode */
     "moduleResolution": "bundler",
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
@@ -23,7 +23,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

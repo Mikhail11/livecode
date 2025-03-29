@@ -1,0 +1,19 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+RUN npm install -g pnpm@8.15.9
+
+COPY apps/server/build ./apps/server/build
+COPY apps/server/package.json ./apps/server
+COPY common/config/rush/pnpm-lock.yaml ./apps/server
+
+WORKDIR /app/apps/server
+
+# получаем версию cross-env и удаляем кавычки
+# RUN CROSS_ENV_VERSION=$(npm pkg get dependencies.cross-env | sed 's/"//g')
+# RUN npm install -g cross-env@$CROSS_ENV_VERSION
+# RUN npm install -g @nestjs/cli @nestjs/common@11.0.1 @nestjs/core@11.0.1
+
+RUN pnpm i --frozen-lockfile 
+CMD ["npm", "run", "start:prod"]

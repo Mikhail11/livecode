@@ -1,0 +1,18 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+RUN npm install -g @microsoft/rush@5.133.4
+
+COPY rush.json .
+COPY common/config/rush/ ./common/config/rush/
+COPY apps/server/ ./apps/server/
+COPY apps/client/package.json ./apps/client/
+
+RUN rush update
+
+WORKDIR /app/apps/server
+
+RUN npm run build
+
+CMD ["npm", "run", "start:prod"]

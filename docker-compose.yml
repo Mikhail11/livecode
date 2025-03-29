@@ -1,0 +1,32 @@
+version: '3.9'
+
+# чтобы env-переменные были доступны в самом docker-compose-файле:
+# docker-compose --env-file ./apps/server/.env.development up
+# если рядом с docker-compose.yaml лежит файл .env, то docker-compose будет использовать его по-умолчанию
+services:
+  postgres:
+    image: postgres:17
+    restart: always
+    container_name: postgres_container
+
+    env_file:
+      - ./apps/server/.env.development
+
+    ports:
+      - '${POSTGRES_PORT:-5433}:5432'
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:9.1.0
+    restart: always
+    container_name: pgadmin4_container
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=pgadmin4
+    ports:
+      - '5050:80'
+    volumes:
+      - ./pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - postgres

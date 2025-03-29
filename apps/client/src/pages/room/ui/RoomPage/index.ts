@@ -1,1 +1,1 @@
-export { RoomPage } from './Page.tsx';
+export { RoomPage } from './RoomPage';
