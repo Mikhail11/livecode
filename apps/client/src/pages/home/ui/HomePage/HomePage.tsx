@@ -54,7 +54,7 @@ export const HomePage = () => {
       <h1>Users list</h1>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '30px', marginBottom: '50px' }}>
         {users?.map((user) => (
-          <article style={{ border: '1px solid aqua' }}>
+          <article style={{ border: '1px solid aqua' }} key={user.id}>
             <h3>ID {user.id}</h3>
             <h4>{user.email}</h4>
             <h4>Created at {user.createdAt}</h4>
