@@ -1,5 +1,6 @@
+import { HomePage } from '@pages/Home';
+import { RoomPage } from '@pages/Room';
 import { BrowserRouter, Routes, Route } from 'react-router';
-import { HomePage, RoomPage } from '@pages';
 
 export const AppRoutes = () => {
   return (
