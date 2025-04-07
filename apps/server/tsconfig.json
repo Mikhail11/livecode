@@ -19,6 +19,8 @@
     "paths": {
       "~app": ["src/app/index"],
       "~modules/*": ["src/modules/*"],
+      "~constants": ["src/shared/constants/index"],
+      "~utils/*": ["src/shared/utils/*"],
       "~shared/*": ["src/shared/*"]
     }
   },

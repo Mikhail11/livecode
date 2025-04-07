@@ -1,7 +1,9 @@
 version: '3.9'
 
 # чтобы env-переменные были доступны в самом docker-compose-файле:
+
 # docker-compose -f docker-compose.production.yml --env-file ./apps/server/.env.production up
+
 # если рядом с docker-compose.yaml лежит файл .env, то docker-compose будет использовать его по-умолчанию
 services:
   postgres:
@@ -32,6 +34,18 @@ services:
     depends_on:
       - postgres
 
+  code-executor:
+    image: ghcr.io/engineer-man/piston
+    container_name: piston_api
+    restart: always
+    privileged: true
+    ports:
+      - '${CODE_EXECUTOR_PORT:-2000}:2000'
+    volumes:
+      - ./piston-data/packages:/piston/packages
+    tmpfs:
+      - /tmp:exec
+
   server:
     build:
       context: .
@@ -47,6 +61,7 @@ services:
 
     depends_on:
       - postgres
+      - code_executor
 
   client:
     build:

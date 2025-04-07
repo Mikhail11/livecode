@@ -74,3 +74,5 @@ common/autoinstallers/*/.npmrc
 
 /pgdata
 /pgadmin-data
+/piston-data
+piston.tar
