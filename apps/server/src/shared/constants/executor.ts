@@ -1,3 +1,4 @@
 export const EXECUTOR_URLS = {
-  allLanguages: '/api/v2/packages',
+  packages: '/api/v2/packages',
+  runtimes: '/api/v2/runtimes',
 };

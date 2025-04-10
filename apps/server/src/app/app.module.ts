@@ -5,6 +5,7 @@ import { AuthModule } from '~modules/auth';
 import { ExecutorModule } from '~modules/executor';
 import { UserModel, UserModule } from '~modules/user';
 import { HttpClientModule } from '~utils/http-client';
+import { HttpClientRxModule } from '~utils/http-client-rx';
 
 @Module({
   controllers: [],
@@ -25,6 +26,7 @@ import { HttpClientModule } from '~utils/http-client';
       autoLoadModels: true,
     }),
     HttpClientModule,
+    HttpClientRxModule,
     AuthModule,
     UserModule,
     ExecutorModule,
