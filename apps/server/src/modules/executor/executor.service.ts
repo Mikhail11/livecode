@@ -1,89 +1,106 @@
-import { HttpStatus, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { EXECUTOR_URLS } from '~constants';
 import { HttpClientService } from '~utils/http-client';
-import { InstalledPackageDto, InstallPackageDto, PackageDto } from './dto';
+import {
+  LanguageDto,
+  AvailableLanguageDto,
+  PossibleLanguageDto,
+  ExecuteCodeDto,
+  ExecuteCodeResultDto,
+  PossibleLanguagesResponseDto,
+  AvailableLanguagesResponseDto,
+} from './dto';
 import { isAxiosError } from 'axios';
-import { ERequestStatus } from '~types';
+import { EResponseStatus, IBaseErrorResponse, TBaseResponse } from '~types';
 
 @Injectable()
 export class ExecutorService {
   constructor(private readonly httpClient: HttpClientService) {}
 
-  // TODO добавить валидация данных в ответе
-  async getAllLanguages() {
-    const url = `http://${process.env.CODE_EXECUTOR_HOST}:${process.env.CODE_EXECUTOR_PORT}${EXECUTOR_URLS.packages}`;
-
-    try {
-      const response = await this.httpClient.get<PackageDto[]>(url);
-
-      return {
-        status: ERequestStatus.Success,
-        data: {
-          languages: response.data,
-        },
-      };
-    } catch (error) {
-      return this.handleError(error);
-    }
-  }
-
-  async getAvailableAllLanguages() {
-    const url = `http://${process.env.CODE_EXECUTOR_HOST}:${process.env.CODE_EXECUTOR_PORT}${EXECUTOR_URLS.runtimes}`;
-
-    try {
-      const response = await this.httpClient.get<InstalledPackageDto[]>(url);
-
-      return {
-        status: ERequestStatus.Success,
-        data: {
-          languages: response.data,
-        },
-      };
-    } catch (error) {
-      return this.handleError(error);
-    }
-  }
-
-  async installPackage(packageDto: InstallPackageDto) {
-    const url = `http://${process.env.CODE_EXECUTOR_HOST}:${process.env.CODE_EXECUTOR_PORT}${EXECUTOR_URLS.packages}`;
+  async executeCode(
+    dto: ExecuteCodeDto,
+  ): Promise<TBaseResponse<ExecuteCodeResultDto>> {
+    const url = `http://${process.env.CODE_EXECUTOR_HOST}:${process.env.CODE_EXECUTOR_PORT}${EXECUTOR_URLS.execute}`;
 
     try {
       const response = await this.httpClient.post<
-        PackageDto,
-        InstallPackageDto
-      >(url, packageDto);
+        ExecuteCodeResultDto,
+        ExecuteCodeDto
+      >(url, dto);
 
       return {
-        status: ERequestStatus.Success,
+        status: EResponseStatus.Success,
         data: response.data,
       };
     } catch (error) {
-      // TODO провести рефакторинг для случая 'Already installed'
-      if (
-        isAxiosError(error) &&
-        error.status === HttpStatus.INTERNAL_SERVER_ERROR &&
-        error.response?.data &&
-        'message' in error.response.data
-      ) {
-        return {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          data: error.response.data,
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-          message: error.response.data.message as string,
-          status: ERequestStatus.Success,
-        };
-      }
-
       return this.handleError(error);
     }
   }
 
-  private handleError(error: unknown) {
+  // TODO добавить валидация данных в ответе
+  async getPossibleLanguages(): Promise<
+    TBaseResponse<PossibleLanguagesResponseDto>
+  > {
+    const url = `http://${process.env.CODE_EXECUTOR_HOST}:${process.env.CODE_EXECUTOR_PORT}${EXECUTOR_URLS.packages}`;
+
+    try {
+      const response = await this.httpClient.get<PossibleLanguageDto[]>(url);
+
+      return {
+        status: EResponseStatus.Success,
+        data: {
+          languages: response.data,
+        },
+      };
+    } catch (error) {
+      return this.handleError(error);
+    }
+  }
+
+  async getAvailableLanguages(): Promise<
+    TBaseResponse<AvailableLanguagesResponseDto>
+  > {
+    const url = `http://${process.env.CODE_EXECUTOR_HOST}:${process.env.CODE_EXECUTOR_PORT}${EXECUTOR_URLS.runtimes}`;
+
+    try {
+      const response = await this.httpClient.get<AvailableLanguageDto[]>(url);
+
+      return {
+        status: EResponseStatus.Success,
+        data: {
+          languages: response.data,
+        },
+      };
+    } catch (error) {
+      return this.handleError(error);
+    }
+  }
+
+  async installLanguage(
+    languageDto: LanguageDto,
+  ): Promise<TBaseResponse<LanguageDto>> {
+    const url = `http://${process.env.CODE_EXECUTOR_HOST}:${process.env.CODE_EXECUTOR_PORT}${EXECUTOR_URLS.packages}`;
+
+    try {
+      const response = await this.httpClient.post<LanguageDto, LanguageDto>(
+        url,
+        languageDto,
+      );
+
+      return {
+        status: EResponseStatus.Success,
+        data: response.data,
+      };
+    } catch (error) {
+      return this.handleError(error);
+    }
+  }
+
+  private handleError(error: unknown): IBaseErrorResponse {
     return {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       data: isAxiosError(error) ? error.response?.data : undefined,
       message: isAxiosError(error) ? error.message : 'Unknown error',
-      status: ERequestStatus.Error,
+      status: EResponseStatus.Error,
     };
   }
 }
