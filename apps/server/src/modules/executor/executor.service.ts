@@ -15,12 +15,14 @@ import { EResponseStatus, IBaseErrorResponse, TBaseResponse } from '~types';
 
 @Injectable()
 export class ExecutorService {
+  private baseUrl = `${process.env.CODE_EXECUTOR_HOST}:${process.env.CODE_EXECUTOR_PORT}`;
+
   constructor(private readonly httpClient: HttpClientService) {}
 
   async executeCode(
     dto: ExecuteCodeDto,
   ): Promise<TBaseResponse<ExecuteCodeResultDto>> {
-    const url = `http://${process.env.CODE_EXECUTOR_HOST}:${process.env.CODE_EXECUTOR_PORT}${EXECUTOR_URLS.execute}`;
+    const url = `${this.baseUrl}${EXECUTOR_URLS.execute}`;
 
     try {
       const response = await this.httpClient.post<
@@ -41,7 +43,7 @@ export class ExecutorService {
   async getPossibleLanguages(): Promise<
     TBaseResponse<PossibleLanguagesResponseDto>
   > {
-    const url = `http://${process.env.CODE_EXECUTOR_HOST}:${process.env.CODE_EXECUTOR_PORT}${EXECUTOR_URLS.packages}`;
+    const url = `${this.baseUrl}${EXECUTOR_URLS.packages}`;
 
     try {
       const response = await this.httpClient.get<PossibleLanguageDto[]>(url);
@@ -60,7 +62,7 @@ export class ExecutorService {
   async getAvailableLanguages(): Promise<
     TBaseResponse<AvailableLanguagesResponseDto>
   > {
-    const url = `http://${process.env.CODE_EXECUTOR_HOST}:${process.env.CODE_EXECUTOR_PORT}${EXECUTOR_URLS.runtimes}`;
+    const url = `${this.baseUrl}${EXECUTOR_URLS.runtimes}`;
 
     try {
       const response = await this.httpClient.get<AvailableLanguageDto[]>(url);
@@ -79,7 +81,7 @@ export class ExecutorService {
   async installLanguage(
     languageDto: LanguageDto,
   ): Promise<TBaseResponse<LanguageDto>> {
-    const url = `http://${process.env.CODE_EXECUTOR_HOST}:${process.env.CODE_EXECUTOR_PORT}${EXECUTOR_URLS.packages}`;
+    const url = `${this.baseUrl}${EXECUTOR_URLS.packages}`;
 
     try {
       const response = await this.httpClient.post<LanguageDto, LanguageDto>(
