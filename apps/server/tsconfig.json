@@ -21,6 +21,7 @@
       "~modules/*": ["src/modules/*"],
       "~constants": ["src/shared/constants/index"],
       "~utils/*": ["src/shared/utils/*"],
+      "~types": ["src/shared/types/index"],
       "~shared/*": ["src/shared/*"]
     }
   },
