@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tsConfig from './tsconfig.app.json';
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   resolve: {
     alias: getTSAliasPaths(tsConfig),
   },
@@ -11,4 +11,7 @@ export default defineConfig({
   build: {
     outDir: './build',
   },
-});
+  define: {
+    __IS_DEV__: mode === 'development',
+  },
+}));

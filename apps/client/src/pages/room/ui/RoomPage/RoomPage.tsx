@@ -1,16 +1,17 @@
-import { useState } from 'react';
-
 import { Layout } from './RoomPage.styles';
 import { Editor } from '@widgets/Editor';
 import { Playground } from '@widgets/Playground';
+import { OutputConsole } from '@widgets/OutputConsole/ui/OutputConsole/OutputConsole';
+import { ExecuteCode } from '@features/ExecuteCode';
 
 export const RoomPage = () => {
-  const [code, setCode] = useState<string>('');
-
   return (
     <Layout>
-      <Editor onChange={setCode} />
-      <Playground code={code} />
+      <Editor />
+      {/* <Playground code={code} /> */}
+      <OutputConsole />
+
+      <ExecuteCode />
     </Layout>
   );
 };
