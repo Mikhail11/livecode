@@ -6,7 +6,7 @@ export const Layout = styled.main`
   grid-template-columns: repeat(2, 1fr);
 
   width: 100%;
-  height: 100vh;
+  min-height: 90vh;
 
   box-sizing: border-box;
 `;

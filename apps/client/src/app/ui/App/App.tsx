@@ -1,7 +1,12 @@
 import { AppRoutes } from '../AppRoutes';
+import { StoreProvider } from '../StoreProvider';
 
 import './App.css';
 
 export function App() {
-  return <AppRoutes />;
+  return (
+    <StoreProvider>
+      <AppRoutes />
+    </StoreProvider>
+  );
 }
