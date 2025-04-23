@@ -1,7 +1,9 @@
 import { ReactElement } from 'react';
+import MonacoEditor from '@monaco-editor/react';
 
 import { IEditorProps } from './Editor.interfaces';
-import { EditArea, Wrapper } from './Editor.styles';
+import { Wrapper } from './Editor.styles';
+import { EDITOR_CONFIG } from './config';
 
 export const Editor = ({ className, onChange, defaultCode = '' }: IEditorProps): ReactElement => {
   const handleChange = (code: string | undefined) => {
@@ -10,7 +12,7 @@ export const Editor = ({ className, onChange, defaultCode = '' }: IEditorProps):
 
   return (
     <Wrapper className={className}>
-      <EditArea onChange={handleChange} defaultValue={defaultCode} defaultLanguage="javascript" />
+      <MonacoEditor {...EDITOR_CONFIG} onChange={handleChange} defaultValue={defaultCode} />
     </Wrapper>
   );
 };

@@ -10,7 +10,10 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   resolve: {
-    alias: getTSAliasPaths(tsConfig),
+    alias: {
+      ...getTSAliasPaths(tsConfig),
+      '@mui/styled-engine': '@mui/styled-engine-sc',
+    },
   },
   build: {
     rollupOptions: {

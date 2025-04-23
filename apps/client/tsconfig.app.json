@@ -13,7 +13,8 @@
       "@entities/*": ["src/entities/*"],
       "@widgets/*": ["src/widgets/*"],
       "@api/*": ["src/shared/api/*"],
-      "@ui/*": ["src/shared/ui/*"]
+      "@ui/*": ["src/shared/ui/*"],
+      "@shared/*": ["src/shared/*"]
     },
 
     "moduleResolution": "bundler",

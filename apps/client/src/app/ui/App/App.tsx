@@ -1,7 +1,13 @@
+import { AppThemeProvider } from '@shared/theme';
+
 import { AppRoutes } from '../AppRoutes';
 
 import './App.css';
 
 export function App() {
-  return <AppRoutes />;
+  return (
+    <AppThemeProvider>
+      <AppRoutes />
+    </AppThemeProvider>
+  );
 }
