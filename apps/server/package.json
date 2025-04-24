@@ -36,7 +36,9 @@
     "bcryptjs": "~3.0.2",
     "class-transformer": "~0.5.1",
     "@nestjs/axios": "~4.0.0",
-    "axios": "~1.8.4"
+    "axios": "~1.8.4",
+    "@nestjs/websockets": "~11.1.0",
+    "@nestjs/platform-socket.io": "~11.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
