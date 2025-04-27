@@ -8,7 +8,7 @@ import { getTSAliasPaths } from './vite.utils';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   resolve: {
     alias: getTSAliasPaths(tsConfig),
   },
@@ -21,5 +21,8 @@ export default defineConfig({
     },
     outDir: './build',
   },
+  define: {
+    __IS_DEV__: mode === 'development',
+  },
   plugins: [react()],
-});
+}));
