@@ -1,5 +1,5 @@
 import { Editor } from '@widgets/Editor';
-import { Playground } from '@widgets/Playground';
+// import { Playground } from '@widgets/Playground';
 import { OutputConsole } from '@widgets/OutputConsole';
 import { ExecuteCode } from '@features/ExecuteCode';
 import { CODE_TEMPLATE } from './RoomPage.constants';
