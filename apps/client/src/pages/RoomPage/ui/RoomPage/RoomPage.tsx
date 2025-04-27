@@ -1,10 +1,9 @@
-import { Layout } from './RoomPage.styles';
 import { Editor } from '@widgets/Editor';
-import { Playground } from '@widgets/Playground';
-import { OutputConsole } from '@widgets/OutputConsole/ui/OutputConsole/OutputConsole';
+// import { Playground } from '@widgets/Playground';
+import { OutputConsole } from '@widgets/OutputConsole';
 import { ExecuteCode } from '@features/ExecuteCode';
-
-import { CODE_TEMPLATE } from './constants';
+import { CODE_TEMPLATE } from './RoomPage.constants';
+import { Layout } from './RoomPage.styles';
 
 export const RoomPage = () => {
   return (
