@@ -8,7 +8,7 @@ import { getTSAliasPaths } from './vite.utils';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   resolve: {
     alias: getTSAliasPaths(tsConfig),
   },
@@ -16,10 +16,13 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, 'index.html'),
-        playground: resolve(__dirname, 'playground/index.html'),
+        playground: resolve(__dirname, 'playground.html'),
       },
     },
     outDir: './build',
   },
+  define: {
+    __IS_DEV__: mode === 'development',
+  },
   plugins: [react()],
-});
+}));

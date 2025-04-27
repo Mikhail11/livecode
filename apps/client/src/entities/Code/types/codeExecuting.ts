@@ -1,23 +1,19 @@
-/**
- * Подробнее https://piston.readthedocs.io/en/latest/api-v2/
- */
-
-enum EEncoding {
+export enum EEncoding {
   Base64 = 'base64',
   Hex = 'hex',
   Utf8 = 'utf8',
 }
 
-class FileDto {
-  name?: 'my_cool_code.js';
+interface IFileDto {
+  name?: 'sandbox';
   content: string;
   encoding?: EEncoding;
 }
 
-export class ExecuteCodeDto {
+export interface IExecuteCodePayload {
   language: string;
   version: string;
-  files: FileDto[];
+  files: IFileDto[];
   stdin?: '';
   args?: unknown[];
   compile_timeout?: number;
@@ -26,7 +22,7 @@ export class ExecuteCodeDto {
   run_memory_limit?: number;
 }
 
-class ResultDto {
+interface IResult {
   stdout: string;
   stderr: string;
   output: string;
@@ -34,9 +30,9 @@ class ResultDto {
   signal: null;
 }
 
-export class ExecuteCodeResultDto {
+export interface IExecuteCodeResult {
   language: string;
   version: string;
-  run: ResultDto;
-  compile?: ResultDto;
+  run: IResult;
+  compile?: IResult;
 }
