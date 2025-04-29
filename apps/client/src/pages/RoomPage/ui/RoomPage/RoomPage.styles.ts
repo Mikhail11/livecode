@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Grid } from '@ui/Grid';
+import { Grid } from '@ui';
 //TODO: вынести цвета в тему
 const COLOR = '#1e1e1e';
 const BORDER_COLOR = '#cecece';
