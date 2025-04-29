@@ -12,18 +12,17 @@ window.onerror = (
   _colno?: number,
   error?: Error
 ) => console.error(error);
-//@ts-expect-error
+
+// @ts-ignore
 window['react'] = React;
-//@ts-expect-error
+// @ts-ignore
 window['react-dom'] = ReactDOM;
 window.React = React;
 window.ReactDOM = ReactDOM;
-
-//@ts-expect-error
+// @ts-ignore
 window.styled = styled;
 
 let output: string = '';
-let oldOutput: string = output;
 
 const babelConfig = {
   filename: 'index.tsx',
@@ -33,23 +32,38 @@ const babelConfig = {
 };
 
 const rootElement = document.getElementById('root');
+const errorContainer = document.getElementById('error');
+const errorMessage = document.getElementById('error-message');
 
-window.onmessage = (event: MessageEvent) => {
+const root = createRoot(rootElement!);
+
+window.addEventListener('message', (event: MessageEvent) => {
   if (event.data) {
     try {
-      oldOutput = output;
+      hideError();
       output = Babel.transform(event.data, babelConfig).code!;
-    } catch (error) {
-      output = oldOutput;
-    } finally {
-      try {
-        eval(output);
-        const root = createRoot(rootElement!);
-        root.render(React.createElement(app.default));
-      } catch (error) {
-        //@ts-expect-error
-        console.error(error.message);
+      eval(output);
+
+      root.render(React.createElement(app.default));
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        showError(error.message);
       }
     }
   }
-};
+});
+
+function showError(message: string): void {
+  if (errorContainer) {
+    errorContainer.style.display = 'block';
+    rootElement!.style.display = 'none';
+    errorMessage!.innerText = message;
+  }
+}
+
+function hideError(): void {
+  if (errorContainer) {
+    rootElement!.style.display = 'block';
+    errorContainer.style.display = 'none';
+  }
+}

@@ -18,7 +18,8 @@
       "@hooks": ["src/shared/hooks/index"],
       "@types": ["src/shared/types/index"],
       "@ui": ["src/shared/ui/index"],
-      "@utils": ["src/shared/utils/index"]
+      "@utils": ["src/shared/utils/index"],
+      "@shared/*": ["src/shared/*"]
     },
 
     "moduleResolution": "bundler",

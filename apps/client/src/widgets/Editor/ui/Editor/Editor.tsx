@@ -1,26 +1,18 @@
 import { ReactElement } from 'react';
+import MonacoEditor from '@monaco-editor/react';
 
 import { IEditorProps } from './Editor.interfaces';
-import { EditArea, Wrapper } from './Editor.styles';
-import { useCodeStore, useCodeActions } from '@entities/Code';
+import { Wrapper } from './Editor.styles';
+import { EDITOR_CONFIG } from './config';
 
 export const Editor = ({ className, onChange, defaultCode = '' }: IEditorProps): ReactElement => {
-  const { code } = useCodeStore();
-  const { setCode } = useCodeActions();
-
-  const handleChange = (code: string | undefined): void => {
-    setCode(code || '');
+  const handleChange = (code: string | undefined) => {
     onChange?.(code || '');
   };
 
   return (
     <Wrapper className={className}>
-      <EditArea
-        value={code}
-        onChange={handleChange}
-        defaultValue={defaultCode}
-        defaultLanguage="javascript"
-      />
+      <MonacoEditor {...EDITOR_CONFIG} onChange={handleChange} defaultValue={defaultCode} />
     </Wrapper>
   );
 };
