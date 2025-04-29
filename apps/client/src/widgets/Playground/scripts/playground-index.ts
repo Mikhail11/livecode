@@ -17,10 +17,10 @@ window.onerror = (
 window['react'] = React;
 // @ts-ignore
 window['react-dom'] = ReactDOM;
+// @ts-ignore
+window['styled-components'] = styled;
 window.React = React;
 window.ReactDOM = ReactDOM;
-// @ts-ignore
-window.styled = styled;
 
 let output: string = '';
 

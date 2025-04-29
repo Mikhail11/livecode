@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 declare global {
   interface CustomWindow extends Window {
-    styled: Styled;
+    'styled-components': Styled;
     'react-dom': ReactDOM;
     react: React;
   }
