@@ -1,5 +1,8 @@
+import { ERoutes } from '@constants';
+import { buildPath } from '@utils';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router';
+import { useNavigate } from 'react-router';
+import { v4 } from 'uuid';
 
 interface IUser {
   id: number;
@@ -11,6 +14,8 @@ export const HomePage = () => {
   const [users, setUsers] = useState<IUser[] | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setIsLoading(true);
@@ -49,6 +54,14 @@ export const HomePage = () => {
     return <h3>Loading...</h3>;
   }
 
+  const handleEditorButtonClick = (): void => {
+    const roomId = v4();
+
+    const path = buildPath(ERoutes.Room, { id: roomId });
+
+    navigate(path);
+  };
+
   return (
     <div style={{ padding: '50px' }}>
       <h1>Users list</h1>
@@ -62,9 +75,13 @@ export const HomePage = () => {
         ))}
       </div>
 
-      <Link to="/room" style={{ fontSize: '2rem', textDecoration: 'none', color: 'blue' }}>
+      <button
+        type="button"
+        onClick={handleEditorButtonClick}
+        style={{ fontSize: '2rem', textDecoration: 'none', color: 'blue' }}
+      >
         Editor
-      </Link>
+      </button>
     </div>
   );
 };
