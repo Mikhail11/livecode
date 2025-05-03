@@ -1,0 +1,1 @@
+export { useMonacoBinding } from './useMonacoBinding';

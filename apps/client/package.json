@@ -22,7 +22,11 @@
     "react-redux": "~9.2.0",
     "@reduxjs/toolkit": "~2.6.1",
     "axios": "~1.8.4",
-    "@babel/standalone": "~7.27.0"
+    "@babel/standalone": "~7.27.0",
+    "yjs": "~13.6.26",
+    "y-websocket": "^1.4.0",
+    "y-monaco": "~0.1.6",
+    "monaco-editor": "~0.52.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.19.0",

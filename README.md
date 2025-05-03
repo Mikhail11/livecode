@@ -1,3 +1,5 @@
+# Piston
+
 При запуске контейнера Piston в случае возникновения ошибки: `Cgroup v2 not found. Please make sure cgroup v2 is enabled on your system`
 
 На Windows 11:
@@ -23,3 +25,11 @@ processors=2 # Makes the WSL 2 VM use two virtual processors
 https://superuser.com/questions/1765370/cannot-locate-wslconfig-in-user-profile-on-windows-11
 
 https://superuser.com/questions/1765370/cannot-locate-wslconfig-in-user-profile-on-windows-11
+
+# Yjs
+
+Пример настройки клиента:
+
+https://github.com/yjs/yjs-demos/blob/main/monaco-react/src/App.tsx
+
+https://codesandbox.io/p/devbox/distracted-leavitt-79p89r?file=%2Fsrc%2FApp.tsx%3A116%2C13-116%2C20
