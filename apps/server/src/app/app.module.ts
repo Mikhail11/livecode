@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { SequelizeModule } from '@nestjs/sequelize';
+import { EditorModule } from '~gateways/editor';
 import { AuthModule } from '~modules/auth';
 import { ExecutorModule } from '~modules/executor';
 import { UserModel, UserModule } from '~modules/user';
@@ -27,6 +28,7 @@ import { HttpClientRxModule } from '~utils/http-client-rx';
     }),
     HttpClientModule,
     HttpClientRxModule,
+    EditorModule,
     AuthModule,
     UserModule,
     ExecutorModule,

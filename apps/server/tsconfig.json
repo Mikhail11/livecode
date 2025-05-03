@@ -18,6 +18,7 @@
     "noFallthroughCasesInSwitch": false,
     "paths": {
       "~app": ["src/app/index"],
+      "~gateways/*": ["src/gateways/*"],
       "~modules/*": ["src/modules/*"],
       "~constants": ["src/shared/constants/index"],
       "~utils/*": ["src/shared/utils/*"],

@@ -1,5 +1,6 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { WsAdapter } from '@nestjs/platform-ws';
 import { AppModule } from '~app';
 
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
@@ -12,6 +13,8 @@ async function startApp() {
 
   // Включаем автоматическую валидация согласно правилам, описанным в DTO
   app.useGlobalPipes(new ValidationPipe());
+
+  app.useWebSocketAdapter(new WsAdapter(app));
 
   await app.listen(SERVER_PORT, () =>
     console.log(`Server started on port ${SERVER_PORT}`),
