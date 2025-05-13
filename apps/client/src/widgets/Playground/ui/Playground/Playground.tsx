@@ -1,6 +1,6 @@
 import { useEffect, useRef, ReactElement, useState } from 'react';
 
-import { Spinner } from '@ui/Spinner';
+import { Spinner } from '@ui';
 
 import { LoadingOverlay, Preview, Wrapper } from './Playground.styles';
 import { IPlaygroundProps } from './Playground.interfaces.ts';
