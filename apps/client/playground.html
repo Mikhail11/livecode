@@ -1,13 +1,36 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-</head>
-<body>
-<main id="root"></main>
-<script type="module" src="/src/widgets/Playground/scripts/playground-index.ts"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+
+      #error {
+        padding: 16px;
+        background-color: #1e1e1e;
+        color: #db2c24;
+        box-sizing: border-box;
+        height: 100vh;
+      }
+
+      #root {
+        padding: 16px;
+      }
+    </style>
+
+    <section id="error" style="display: none">
+      <p>Произошла ошибка</p>
+      <pre id="error-message"></pre>
+    </section>
+    <main id="root"></main>
+    <script type="module" src="/src/widgets/Playground/scripts/playground-index.ts"></script>
+  </body>
 </html>
