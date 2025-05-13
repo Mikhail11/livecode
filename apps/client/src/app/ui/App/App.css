@@ -3,3 +3,13 @@ body {
   height: 100%;
   box-sizing: border-box;
 }
+
+/* TODO удалить после доработки удаленных курсоров */
+.myGlyphMarginClass {
+  background: red;
+}
+
+/* TODO удалить после доработки удаленных курсоров */
+.myContentClass {
+  background: rgba(58, 187, 46, 0.5);
+}
