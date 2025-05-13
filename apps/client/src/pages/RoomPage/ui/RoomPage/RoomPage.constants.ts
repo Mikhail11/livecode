@@ -1,5 +1,4 @@
-export const CODE_TEMPLATE = `import React from 'react';
-
+export const CODE_TEMPLATE = `
 const App = () =>{
     return (
         <div>Hello</div>
