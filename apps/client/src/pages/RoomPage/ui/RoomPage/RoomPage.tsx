@@ -1,17 +1,27 @@
 import { Editor } from '@widgets/Editor';
 import { Playground } from '@widgets/Playground';
+import { usePersistState } from '@shared/hooks';
+import { Grid } from '@ui';
+
+import { Header, Footer, Layout, Wrapper } from './RoomPage.styles';
 
 import { CODE_TEMPLATE } from './RoomPage.constants';
-import { Layout } from './RoomPage.styles';
-import { useState } from 'react';
 
 export const RoomPage = () => {
-  const [code, setCode] = useState<string>('');
+  const [code, setCode] = usePersistState<string>(CODE_TEMPLATE);
 
   return (
     <Layout>
-      <Editor defaultCode={CODE_TEMPLATE} onChange={setCode} />
-      <Playground code={code} />
+      <Header></Header>
+      <Wrapper container spacing={0}>
+        <Grid size={6}>
+          <Editor defaultCode={code} onChange={setCode} />
+        </Grid>
+        <Grid size={6}>
+          <Playground code={code} />
+        </Grid>
+      </Wrapper>
+      <Footer></Footer>
     </Layout>
   );
 };

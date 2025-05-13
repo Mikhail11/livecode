@@ -36,5 +36,3 @@ export function usePersistState<T extends TInitialState>(
 
   return [state, setState];
 }
-
-export default usePersistState;
