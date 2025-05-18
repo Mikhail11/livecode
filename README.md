@@ -36,4 +36,4 @@ https://codesandbox.io/p/devbox/distracted-leavitt-79p89r?file=%2Fsrc%2FApp.tsx%
 
 # y-webcoket-server
 
-Вебсокет-сервер Yjs https://github.com/yjs/y-websocket-server
+Вебсокет-сервер Yjs https://github.com/yjs/y_websocket_server

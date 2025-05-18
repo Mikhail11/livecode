@@ -36,7 +36,7 @@ services:
 
   code-executor:
     image: ghcr.io/engineer-man/piston
-    container_name: piston_api
+    container_name: piston_api_container
     restart: always
     privileged: true
     ports:
@@ -45,6 +45,23 @@ services:
       - ./piston-data/packages:/piston/packages
     tmpfs:
       - /tmp:exec
+
+  y-websocket-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.y-websocket-server
+    container_name: y_websocket_container
+    restart: always
+
+    environment:
+      # Требуется для того, чтобы y-websocket внутри контейнера прослушивал обращения к localhost на локальном компьютере. использование переменной HOST зашита в y_websocket_server
+      - HOST=0.0.0.0
+
+    ports:
+      # 1234 - порт, который слушает y_websocket_server по-умолчанию
+      # Открываем этот порт только для целей тестирования (через Postman)
+      # Внутри Docker server будет обращаться к y_websocket_server по внутреннему порту 1234
+      - '${YJS_WEBSOCKET_PORT}:1234'
 
   server:
     build:
@@ -58,10 +75,12 @@ services:
 
     ports:
       - '${SERVER_PORT:-5000}:${SERVER_PORT:-5000}'
+      - '${WEBSOCKET_SERVER_PORT}:${WEBSOCKET_SERVER_PORT}'
 
     depends_on:
       - postgres
-      - code_executor
+      - code-executor
+      - y-websocket-server
 
   client:
     build:

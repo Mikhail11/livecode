@@ -15,6 +15,7 @@ import { EResponseStatus, IBaseErrorResponse, TBaseResponse } from '~types';
 
 @Injectable()
 export class ExecutorService {
+  // TODO отрефакторить обращение к process.env. Заменить на configService: ConfigService как в editor.gateway.ts
   private baseUrl = `${process.env.CODE_EXECUTOR_HOST}:${process.env.CODE_EXECUTOR_PORT}`;
 
   constructor(private readonly httpClient: HttpClientService) {}
