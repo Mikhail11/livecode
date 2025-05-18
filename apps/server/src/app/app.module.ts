@@ -13,7 +13,9 @@ import { HttpClientRxModule } from '~utils/http-client-rx';
   providers: [],
   imports: [
     ConfigModule.forRoot({
+      // envFilePath и isGlobal делает ConfigModule injectable и env-переменные доступными внутри модулей (классов)
       envFilePath: `.env.${process.env.NODE_ENV}`,
+      isGlobal: true,
     }),
     SequelizeModule.forRoot({
       dialect: 'postgres',

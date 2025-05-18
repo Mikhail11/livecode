@@ -33,3 +33,7 @@ https://superuser.com/questions/1765370/cannot-locate-wslconfig-in-user-profile-
 https://github.com/yjs/yjs-demos/blob/main/monaco-react/src/App.tsx
 
 https://codesandbox.io/p/devbox/distracted-leavitt-79p89r?file=%2Fsrc%2FApp.tsx%3A116%2C13-116%2C20
+
+# y-webcoket-server
+
+Вебсокет-сервер Yjs https://github.com/yjs/y-websocket-server

@@ -44,3 +44,18 @@ services:
       - ./piston-data/packages:/piston/packages
     tmpfs:
       - /tmp:exec
+
+  y-websocket-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.y-websocket-server
+    container_name: y_websocket_server
+    restart: always
+
+    environment:
+      # Требуется для того, чтобы y-websocket внутри контейнера прослушивал обращения к localhost на локальном компьютере. использование переменной HOST зашита в y-websocket-server
+      - HOST=0.0.0.0
+
+    ports:
+      # 1234 - порт, который слушает y-websocket-server по-умолчанию
+      - '${YJS_WEBSOCKET_PORT}:1234'

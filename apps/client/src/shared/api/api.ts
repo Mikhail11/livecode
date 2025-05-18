@@ -1,5 +1,6 @@
+import { API_BASE_URL } from '@constants';
 import axios from 'axios';
 
 export const axiosClient = axios.create({
-  baseURL: `${import.meta.env.VITE_API_HOST}:${import.meta.env.VITE_API_PORT}`,
+  baseURL: API_BASE_URL,
 });

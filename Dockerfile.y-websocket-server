@@ -1,0 +1,20 @@
+FROM node:20 as builder
+
+RUN apt-get update && apt-get install -y git
+
+RUN git clone https://github.com/yjs/y-websocket-server  /app
+
+WORKDIR /app
+
+RUN npm ci
+
+RUN npm run dist
+
+FROM node:20-alpine
+
+COPY --from=builder /app/dist /app
+COPY --from=builder /app/node_modules /app/node_modules
+
+WORKDIR /app
+
+CMD ["node", "server.cjs"]

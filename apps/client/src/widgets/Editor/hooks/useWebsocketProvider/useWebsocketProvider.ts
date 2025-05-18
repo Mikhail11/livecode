@@ -5,6 +5,8 @@ import { WebsocketProvider } from 'y-websocket';
 
 import { useParams } from 'react-router';
 import { NullableProvider } from '../../model';
+import { validate } from 'uuid';
+import { WEBSOCKET_BASE_URL } from '@constants';
 
 export const useWebsocketProvider = (ydoc: Y.Doc): NullableProvider => {
   const [provider, setProvider] = useState<NullableProvider>(null);
@@ -12,16 +14,13 @@ export const useWebsocketProvider = (ydoc: Y.Doc): NullableProvider => {
   const { id: roomId } = useParams<'id'>();
 
   useEffect(() => {
-    if (!roomId) {
+    if (!roomId || !validate(roomId)) {
+      console.error('Invalid roomId');
+
       return;
     }
 
-    const provider = new WebsocketProvider(
-      // 'ws://localhost:5000/editor',
-      'ws://localhost:1234',
-      roomId,
-      ydoc
-    );
+    const provider = new WebsocketProvider(WEBSOCKET_BASE_URL, roomId, ydoc);
 
     setProvider(provider);
 

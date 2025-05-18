@@ -1,7 +1,8 @@
+import './envConfig';
+import { AppModule } from '~app';
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { WsAdapter } from '@nestjs/platform-ws';
-import { AppModule } from '~app';
 
 const SERVER_PORT = process.env.SERVER_PORT || 3000;
 
